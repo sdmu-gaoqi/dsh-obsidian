@@ -20,7 +20,7 @@ dsh plugin --profile web add @wagq/dsh-obsidian
 **从源码安装**
 
 ```bash
-dsh plugin --profile web add github:sdmu-gaoqi/dsh-obsidian-kb
+dsh plugin --profile web add github:sdmu-gaoqi/dsh-obsidian
 ```
 
 装完刷新页面（或重启 DSH）即可生效，左侧栏出现「知识库」图标。
@@ -135,8 +135,8 @@ dsh plugin --profile web add github:sdmu-gaoqi/dsh-obsidian-kb
 ## 开发
 
 ```bash
-git clone https://github.com/sdmu-gaoqi/dsh-obsidian-kb.git
-cd dsh-obsidian-kb
+git clone https://github.com/sdmu-gaoqi/dsh-obsidian.git
+cd dsh-obsidian
 dsh plugin --profile web add .
 ```
 

@@ -6,11 +6,11 @@
   "author": "sdmu-gaoqi",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sdmu-gaoqi/dsh-obsidian-kb.git"
+    "url": "git+https://github.com/sdmu-gaoqi/dsh-obsidian.git"
   },
-  "homepage": "https://github.com/sdmu-gaoqi/dsh-obsidian-kb#readme",
+  "homepage": "https://github.com/sdmu-gaoqi/dsh-obsidian#readme",
   "bugs": {
-    "url": "https://github.com/sdmu-gaoqi/dsh-obsidian-kb/issues"
+    "url": "https://github.com/sdmu-gaoqi/dsh-obsidian/issues"
   },
   "keywords": [
     "deepseek",

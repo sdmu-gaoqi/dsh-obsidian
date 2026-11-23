@@ -20,7 +20,7 @@ dsh plugin --profile web add @wagq/dsh-obsidian
 **From source**
 
 ```bash
-dsh plugin --profile web add github:sdmu-gaoqi/dsh-obsidian-kb
+dsh plugin --profile web add github:sdmu-gaoqi/dsh-obsidian
 ```
 
 Refresh the page (or restart DSH) and a **Knowledge base** icon appears in the sidebar.
@@ -135,8 +135,8 @@ The vault switcher in the panel header moves between registered vaults without t
 ## Development
 
 ```bash
-git clone https://github.com/sdmu-gaoqi/dsh-obsidian-kb.git
-cd dsh-obsidian-kb
+git clone https://github.com/sdmu-gaoqi/dsh-obsidian.git
+cd dsh-obsidian
 dsh plugin --profile web add .
 ```
 
