@@ -1,0 +1,78 @@
+{
+  "name": "@wagq/dsh-obsidian",
+  "version": "1.1.0",
+  "description": "Connect a local Obsidian vault to DeepSeek Harness: a three-column knowledge workspace in the sidebar (library / document / outline & related), with filters, search, rendered Markdown, in-place editing and right-click menus, plus kb_* agent tools that read and write the same vault in chat. 把本地 Obsidian 知识库接到 DSH 左侧栏，并在对话中让智能体读写同一个 vault。",
+  "license": "MIT",
+  "author": "sdmu-gaoqi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdmu-gaoqi/dsh-obsidian-kb.git"
+  },
+  "homepage": "https://github.com/sdmu-gaoqi/dsh-obsidian-kb#readme",
+  "bugs": {
+    "url": "https://github.com/sdmu-gaoqi/dsh-obsidian-kb/issues"
+  },
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cordis",
+    "obsidian",
+    "obsidian-vault",
+    "knowledge-base",
+    "notes",
+    "markdown",
+    "wiki-links",
+    "sidebar",
+    "agent-tools"
+  ],
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/zh.json",
+    "locale/en.json",
+    "docs",
+    "icon.svg",
+    "README.md",
+    "README.en.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": ">=3.18.4 <4"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=22.19.0",
+    "dsh": ">=0.2.0 <0.3.0"
+  },
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  }
+}

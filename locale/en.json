@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Knowledge base · Obsidian",
+    "description": "Connects a local Obsidian vault to the sidebar: open the Knowledge base icon in the sidebar to get a three-column workspace — library on the left (all / notes / PDF / images / other filters, full-text search, folder tree), document in the middle (rendered Markdown reading plus preview, edit, save, rename, delete and fullscreen), outline and related notes (backlinks / outgoing links) with whole-vault Q&A on the right; right-click the tree to create a note or folder, rename, or delete (moved to .trash, reversible). A kb_* tool set lets the assistant search, read and rewrite the same vault in chat. On first use, open a vault in Obsidian or set an absolute vaultPath in the plugin settings.",
+    "detail": "docs/DETAIL.md"
+  }
+}
