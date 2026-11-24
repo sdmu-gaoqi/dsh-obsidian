@@ -369,17 +369,28 @@ window.__ModuleLoader__.load({
 
       const save = async () => {
         if (!note) return;
+        // DSH WebView 中 React 受控 textarea 的 onChange 偶发不更新 draft；
+        // 这里直接读 DOM 当前值兜底，保证「保存」一定能拿到用户看到的内容。
+        const el = rootRef.current?.querySelector?.('[data-kb-editor]');
+        const content = el && typeof el.value === 'string' ? el.value : draft;
         setBusy(true);
         try {
-          const r = await api('save', { path: note.path, content: draft });
+          const r = await api('save', { path: note.path, content });
           if (r.ok) {
             const fresh = await api(`note?path=${encodeURIComponent(note.path)}`);
             if (fresh.ok) { setNote(fresh.note); setDraft(fresh.note.body); }
+            else setDraft(content);
             setMode('read');
             setNotice(t('saved')); loadTree();
           } else setNotice(r.error || 'save failed');
         } catch (e) { setNotice(String(e)); }
         finally { setBusy(false); }
+      };
+
+      const cancelEdit = () => {
+        setDraft(note?.body ?? '');
+        setMode('read');
+        setNotice('');
       };
 
       // DSH 的 WebView 禁用了 window.prompt / window.confirm，
@@ -946,7 +957,12 @@ window.__ModuleLoader__.load({
               style: { ...S.iconBtn, ...(mode === 'edit' ? S.btnOn : {}) },
               onClick: () => setMode('edit'), title: t('edit'),
             }, t('edit')) : null,
-            note && dirty ? h('button', { style: { ...S.btn, borderColor: C.brand, color: C.brand }, onClick: save, disabled: busy }, busy ? t('saving') : t('save')) : null,
+            note && (dirty || mode === 'edit') ? h('button', {
+              style: { ...S.btn, borderColor: C.brand, color: C.brand },
+              onClick: save,
+              onPointerDown: e => e.stopPropagation(),
+              disabled: busy,
+            }, busy ? t('saving') : t('save')) : null,
             note ? h('button', { style: S.iconBtn, title: t('rename'), onClick: renameNote }, h(Icon, { d: 'M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z' })) : null,
             note ? h('button', { style: S.iconBtn, title: t('delete'), onClick: removeNote }, h(Icon, { d: 'M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14', })) : null,
             h('button', {
@@ -978,7 +994,9 @@ window.__ModuleLoader__.load({
                 mode === 'edit' && note.kind !== 'note' ? null : mode === 'edit'
                   ? h('textarea', {
                       style: S.textarea, value: draft ?? '', spellCheck: false,
+                      'data-kb-editor': '1',
                       onChange: e => setDraft(e.target.value),
+                      onInput: e => setDraft(e.target.value),
                       'aria-label': note.title,
                     })
                   : note.kind === 'image'
@@ -1005,8 +1023,18 @@ window.__ModuleLoader__.load({
                         : h('div', null, ...renderMarkdown(note.body, jumpTo)),
                 mode === 'edit'
                   ? h('div', { style: { display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 14 } },
-                      h('button', { style: S.btn, onClick: () => { setDraft(note.body); setMode('read'); }, disabled: !dirty }, t('cancel')),
-                      h('button', { style: { ...S.btn, borderColor: C.brand, color: C.brand }, onClick: save, disabled: busy || !dirty }, busy ? t('saving') : t('save')),
+                      h('button', {
+                        style: S.btn,
+                        onClick: cancelEdit,
+                        onPointerDown: e => e.stopPropagation(),
+                        disabled: busy,
+                      }, t('cancel')),
+                      h('button', {
+                        style: { ...S.btn, borderColor: C.brand, color: C.brand },
+                        onClick: save,
+                        onPointerDown: e => e.stopPropagation(),
+                        disabled: busy,
+                      }, busy ? t('saving') : t('save')),
                     )
                   : null,
               )

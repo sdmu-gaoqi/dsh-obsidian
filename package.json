@@ -1,6 +1,6 @@
 {
   "name": "@wagq/dsh-obsidian",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Connect a local Obsidian vault to DeepSeek Harness: a three-column knowledge workspace in the sidebar (library / document / outline & related), with filters, search, rendered Markdown, in-place editing and right-click menus, plus kb_* agent tools that read and write the same vault in chat. 把本地 Obsidian 知识库接到 DSH 左侧栏，并在对话中让智能体读写同一个 vault。",
   "license": "MIT",
   "author": "sdmu-gaoqi",
